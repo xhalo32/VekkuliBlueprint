@@ -22,26 +22,11 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for all branches and tags
 
-      - name: Install elan
-        run: curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
-
-      - name: Get Mathlib cache
-        run: ~/.elan/bin/lake exe cache get || true
-
-      - name: Build project
-        run: ~/.elan/bin/lake build ${{ github.repository }}
-
-      - name: Cache build artifacts and API docs
-        uses: actions/cache@v4
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v30
         with:
-          path: |
-            .lake/build
-          key:  LakeBuild-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ hashFiles('lake-manifest.json') }}
-          restore-keys: LakeBuild-
+          nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Build project API documentation
-        run: ~/.elan/bin/lake -R -Kenv=dev build ${{ github.repository }}:docs
-      
       - name: Check for `home_page` folder # this is meant to detect a Jekyll-based website
         id: check_home_page
         run: |
@@ -55,30 +40,26 @@ jobs:
             mkdir -p home_page
           fi
 
-      - name: Build blueprint and copy to `home_page/blueprint`
-        uses: xu-cheng/texlive-action@v2
+      - name: Build blueprint
+        run: |
+          nix-shell -A shell
+          lake exe cache get || true
+          lake build ${{ github.event.repository.name }}
+          lake -R -Kenv=dev build ${{ github.event.repository.name }}:docs
+          leanblueprint web
+          cp -r blueprint/web home_page/blueprint
+      
+      - name: Cache build artifacts and API docs
+        uses: actions/cache@v4
         with:
-          docker_image: ghcr.io/xu-cheng/texlive-full:20231201
-          run: |
-            # Install necessary dependencies and build the blueprint
-            apk update
-            apk add --update make py3-pip git pkgconfig graphviz graphviz-dev gcc musl-dev
-            git config --global --add safe.directory $GITHUB_WORKSPACE
-            git config --global --add safe.directory `pwd`
-            python3 -m venv env
-            source env/bin/activate
-            pip install --upgrade pip requests wheel
-            pip install pygraphviz --global-option=build_ext --global-option="-L/usr/lib/graphviz/" --global-option="-R/usr/lib/graphviz/"
-            pip install leanblueprint
-            # leanblueprint pdf
-            mkdir -p home_page
-            # cp blueprint/print/print.pdf home_page/blueprint.pdf
-            leanblueprint web
-            cp -r blueprint/web home_page/blueprint
+          path: |
+            .lake/build
+          key:  LakeBuild-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ hashFiles('lake-manifest.json') }}
+          restore-keys: LakeBuild-
 
       - name: Check declarations mentioned in the blueprint exist in Lean code
         run: |
-            ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
+          lake exe checkdecls blueprint/lean_decls
 
       - name: Copy API documentation to `home_page/docs`
         run: cp -r .lake/build/doc home_page/docs

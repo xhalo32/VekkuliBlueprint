@@ -178,3 +178,78 @@
 
     Normaalisti matematiikassa implisiittiset parametrit sidotaan universaalisti lauseen tai määritelmän ylätasolla, mutta tämä johtaa väärään tulkintaan määritelmän 4.1.1 kohdalla.
 \end{remark}
+
+\section{Integrointi yleisten joukkojen yli}
+
+\begin{definition}[Nollajoukko]
+    Joukko $N \subseteq \R^2$ on \emph{nollajoukko} jos jokaiselle $\epsilon \gt 0$ on olemassa (mahdollisesti äärellinen) jono suorakaiteita $R_i = [a_i, b_i] \times [c_i, d_i]$ jotka peittävät $N$ siten että
+
+    \[
+    \sum_{i} \area(R_i) \lt \epsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Kompakti]
+    Joukko $A \subseteq \R^n$ on \emph{kompakti}, jos jokaisella jonolla $(x_i)$, missä $x_i \in A$ kaikilla $i$, on sellainen suppeneva osajono $(x_{i_j})$ että $\lim_{j \to \infty} x_{i_j} \in A$.
+\end{definition}
+
+\begin{definition}[Suljettu]
+    Joukko $A \subseteq \R^n$ on \emph{suljettu}, jos jokaisella suppenevalla jonolla $(x_i)$, missä $x_i \in A$ kaikilla $i$, pätee $\lim_{i \to \infty} x_i \in A$.
+\end{definition}
+
+\begin{theorem}[Heine-Borel]
+    Joukko $A \subseteq \R^n$ on kompakti jos ja vain jos se on rajoitettu ja suljettu.
+\end{theorem}
+
+\begin{example}[Pohdintatehtävä]
+    Olkoot $g_1, g_2 : [a, b] \to \R$ jatkuvia ja $g_1 \leq g_2$.
+    Osoita, että
+
+    \[
+    A = \set{(x, y) \mid g_1(x) \leq y \le g_2(x)}
+    \]
+
+    on kompakti.
+\end{example}
+\begin{proof}
+    Osoitetaan, että $A$ on suljettu.
+    Olkoon $(s_i)$ suppeneva jono $A$ pisteitä.
+
+    \[
+        \vdash \lim_{i \to \infty} s_i \in A.
+    \]
+
+    Nimetään suppeneva piste $(x, y)$
+
+    \[
+        \vdash \lim_{i \to \infty} s_i = (x, y) \
+    \]
+
+    Riittää osoittaa komponenttifunktioiden suppeneminen
+
+    
+    \[
+        s_i = (x_i, y_i)
+    \]
+    \[
+        \vdash \lim_{i \to \infty} x_i = x \land
+        \lim_{i \to \infty} y_i = y
+    \]
+    
+    Huomataan, että $\set{x_1 \mid x \in A} = [a, b]$, sillä kaikilla $x$ on olemassa $y$ siten että $g_1(x) \leq y \leq g_2(x)$.
+    Sillä $[a, b]$ on suljettu ja $(x_i)$ suppenee, niin ensimmäinen konjunktion jäsen on totta.
+
+    \[
+    \vdash \lim_{i \to \infty} y_i = y
+    \]
+
+    Sillä $g_1$ jva, niin $g_1(x) = \lim_{i \to \infty} g_1(x_i)$.
+    Vastaavasti $g_2(x) = \lim_{i \to \infty} g_2(x_i)$.
+    Nyt, koska $\lim_{i \to \infty} y_i = y$
+
+    \[
+    g_1(x) = \lim_{i \to \infty} g_1(x_i) \leq \lim_{i \to \infty} y_i = y = \lim_{i \to \infty} y_i \leq \lim_{i \to \infty} g_2(x_i) = g_2(x)
+    \]
+
+    Täten $(x, y) \in A$.
+\end{proof}
