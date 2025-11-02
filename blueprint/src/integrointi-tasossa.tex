@@ -1,0 +1,180 @@
+\chapter{Integrointi tasossa}
+
+\begin{variable}
+    Olkoon $X$ joukko, ja $d$ $X$:n metriikka.
+    Nyt $(X, d)$ on metrinen avaruus ja täten sillä on metriikan indusoima topologia.
+\end{variable}
+
+% TODO siirrä sisäpiste, joukko jutut muualle
+
+\begin{definition}[Sisäpiste]
+    \label{sisäpiste}
+    Olkoon $A \subset X$.
+
+    Piste $x$ on joukon $A$ \emph{sisäpiste}, jos
+
+    \[
+        \exists r \gt 0, B_d(x, r) \subset A
+    \]
+
+    missä $B_d(x, r)$ on metrisen avaruuden $(X, d)$ avoin $r$-säteinen $x$-keskeinen kuula.
+\end{definition}
+
+\begin{definition}[Sisäjoukko (sisus)]
+    \label{sisäjoukko}
+    \uses{sisäpiste}
+    Olkoon $A \subset X$.
+
+    $A$:n \emph{sisäjoukko} $\interior A$ on $A$:n sisäpisteiden joukko.
+\end{definition}
+
+\begin{definition}[Pistevieras]
+    \label{pistevieras}
+    Joukot $C_i \subset \R$ ovat \emph{pistevieraita} jos leikkausjoukot $\C_i \inter C_j = \emptyset$ kaikilla $i \neq j$, lukuunottamatta äärellistä määrää "kulmapisteitä".
+
+    Huom: tämä kurssin käyttämä määritelmä on epäpätevä, ks. määritelmä \ref{reunavieras}
+\end{definition}
+
+\begin{variable}
+    \label{muuttuja_C_i}
+    Olkoon $C_i \subset X$ numeroituva jono $X$ osajoukkoja.
+\end{variable}
+
+\begin{definition}[Reunavieras]
+    \label{reunavieras}
+    \uses{sisäjoukko}
+    Joukot $C_i$ (muuttujasta \ref{muuttuja_C_i}) ovat \emph{reunavieraita} jos leikkausjoukot $\interior C_i \inter \interior C_j = \emptyset$ kaikilla $i \neq j$.
+\end{definition}
+
+\begin{remark}
+    Määritelmä \ref{reunavieras} on yleistys kurssin määritelmästä \ref{pistevieras}, sillä pistevierautta käytetään kurssilla vain $\R^1$ osajoukoista (joiden reuna koostuu $\R^1$ pisteistä).
+\end{remark}
+
+\begin{theorem}[Reunavieras (vaihtoehtoinen määritelmä)]\
+    \label{reunavieras_vaiht}
+    \uses{reuna}
+    Joukot $C_i$ ovat \emph{reunavieraita} jos ja vain jos $C_i \inter C_j \subset \partial C_i \union \partial C_j$ kaikilla $i \neq j$.
+\end{theorem}
+
+\begin{definition}[Joukon peite]
+    \label{peite}
+    Olkoon $S$ joukko.
+
+    Perhe $P \subset \powerset (S)$ on \emph{joukon} $S$ \emph{peite}, jos se koostuu $S$:n osajoukoista, jotka yhdessä sisältävät kaikki $S$ alkiot.
+    Täsmällisemmin,
+    \[
+    \bigcup_{p \in P} p = s.
+    \]
+\end{definition}
+
+\begin{definition}[Joukon ositus]
+    \label{ositus}
+    \uses{peite}
+    Olkoon $S$ joukko.
+
+    Peite $P$ on \emph{joukon} $S$ \emph{ositus}, jos se koostuu epätyhjistä erillisistä joukoista.
+    Täsmällisemmin,
+
+    \begin{itemize}
+        \item $\emptyset \not\in P$
+        \item $p_1 \inter p_2 = \emptyset$ kaikilla eri $p_1, p_2 \in P$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Reunavieras ositus]
+    \label{reunavieras_ositus}
+    \uses{peite, reunavieras}
+    Olkoon $S \subset X$.
+
+    $S$ numeroituva peite $C_i$ on $S$ \emph{reunavieras ositus}, jos $C_i$ on reunavieras, ja lisäksi $C_i \neq \emptyset$.
+\end{definition}
+
+\begin{theorem}[Ositus on reunavieras ositus]
+    \label{ositus_reunavieras}
+    \uses{reunavieras_ositus, ositus}
+\end{theorem}
+\begin{proof}
+    Osituksen joukot ovat erillisiä, joten ne ovat reunavieraita.
+\end{proof}
+
+\section{Integraalin määrittely suorakaiteen yli}
+
+\begin{definition}[Suorakaiteen ositus]
+    \label{suorakaiteen_ositus}
+    \uses{reunavieras_ositus}
+    Olkoon $n, m \in \N_1$ ja $D = [a, b] \times [c, d]$.
+
+    Suorakaiteen $D$ \emph{ositus eli jako} $\set{R_{i j}}_{1 \le i \le m, 1 \le j \le n}$ muodostuu välien $[a, b]$ ja $[c, d]$ osituksista: $a = x_0 \lt \dots \lt x_m = b$, $c = y_0 \lt \dots \lt y_n = d$, missä suorakaiteet $R_{i j} = [x_{(i - 1)}, x_i] \times [y_{(j - 1)}, y_j]$ muodostavat joukon $D$ reunavieraan osituksen.
+\end{definition}
+
+\begin{remark}
+    \uses{suorakaiteen_ositus}
+    Huomaa, että jos $\set{R_{i j}}$ on ositus, niin $R_{i j}$ on suorakaide, ja ei ole ositus, toisin kuin kurssikirjassa on käytäntönä.
+
+    Tästedes eroamme kurssikirjasta käyttämällä $R_{i j}$ sijaan $\set{R_{i j}}$ kun kyseessä on ositus.
+\end{remark}
+
+\begin{theorem}[Suorakaiteen ositus on reunavieras ositus]
+    \label{suorakaiteen_ositus_reunavieras}
+    \uses{suorakaiteen_ositus}
+\end{theorem}
+\begin{proof}
+    Ilman yleistyksen menetystä $R_{i j} = [x_{(i - 1)}, x_i] \times [y_{(j - 1)}, y_j]$ leikkaa ainoastaan sellaisia $R_{k l}$, missä $k = i + 1$ tai $l = j + 1$.
+    
+    Huomataan, että $\interior R_{i j} = (x_{(i - 1)}, x_i) \times (y_{(j - 1)}, y_j)$, joten selvästi $\interior R_{i j} \inter \interior R_{k l} = \emptyset$.
+\end{proof}
+
+\begin{definition}[Suorakaiteen pinta-ala]
+    \label{suorakaiteen_pinta_ala}
+    Olkoon $a \leq b$ ja $c \leq d$.
+    Suorakaiteen $R = [a, b] \times [c, d]$ \emph{pinta-ala} $\Delta R := (b - a)(d - c)$.
+\end{definition}
+
+\begin{definition}[Suorakaiteen läpimitta]
+    \label{suorakaiteen_läpimitta}
+    Olkoon $a \leq b$ ja $c \leq d$.
+    Suorakaiteen $R = [a, b] \times [c, d]$ \emph{läpimitta} $d(R) = \left((b - a)^2 + (d - c)^2\right)^{1/2}$.
+\end{definition}
+
+\begin{definition}[Jaon normi]
+    \label{jaon_normi}
+    \uses{suorakaiteen_läpimitta, suorakaiteen_ositus}
+    Olkoon $\set{R_{i j}}$ suorakaiteen $D$ ositus.
+
+    \emph{Jaon normilla} $\norm{\set{R_{i j}}}$ tarkoitetaan suorakaiteiden $R_{i j}$ suurinta läpimittaa, eli
+    
+    \[
+    \norm{\set{R_{i j}}} := \max_{i, j} d(R_{i j}).
+    \]
+\end{definition}
+
+\begin{variable}
+    Olkoon $D$ suorakaide ja $f : D \to \R$ rajoitettu.
+\end{variable}
+
+\begin{definition}[Riemannin summa]
+    \label{riemannin_summa}
+    \uses{suorakaiteen_ositus, suorakaiteen_pinta_ala}
+    Olkoon $\set{R_{i j}}_{1 \le i \le m, 1 \le j \le n}$ suorakaiteen $D$ ositus ja $\set{\xi_{i j}}$ siten, että $\xi_{i j} \in R_{i j}$ kaikilla $i$ ja $j$.
+
+    Funktion $f$ \emph{Riemannin summa}
+    \[
+    R(f, \set{R_{i j}}, \set{\xi_{i j}}) = \sum_{i,j} f(\xi_{i j}) \Delta(R_{i j}).
+    \]
+\end{definition}
+
+\begin{definition}[Riemann-integroituva]
+    \label{integroituva}
+    \uses{riemannin_summa, jaon_normi}
+    Rajoitettu funktio $f$ on \emph{Riemann-integroituva} suorakaiteen $D$ yli, jos on olemassa $I \in \R$ siten että kaikilla $\epsilon \gt 0$ on olemassa $\delta \gt 0$ siten että kaikilla $m, n \in \N_1$ ja $\set{R_{i j}}_{1 \le i \le m, 1 \le j \le n}$ joille $\norm{\set{R_{i j}}} \lt \delta$, niin kaikilla $\set{\xi_{i j}}_{1 \le i \le m, 1 \le j \le n}$ joille $\xi_{i j} \in R_{i j}$ kaikilla $i, j$, pätee $|R(f, \set{R_{i, j}}, \set{\xi_{i, j}})| \lt \epsilon$.
+\end{definition}
+
+\begin{remark}
+    Kurssin määritelmässä 4.1.1 Riemann-integroituvuudesta on $\xi$ jätetty tahallaan kvantifioimatta, joka aiheuttaa vaikeuden tulkita määritelmä oikein.
+
+    Määritelmä \ref{integroituva} vastaa kurssin määritelmää, kunhan tulkitaan, että $\set{\xi_{i j}}$ kvantifioidaan (universaalisti) vasta $\set{R_{i j}}$ kvantifioinnin jälkeen.
+    Tämä tulkinta ei ole yksiselitteinen, koska Riemannin summan määritelmä ei eksplisiittisesti vaadi $\set{\xi_{i j}}$ riippuvan osituksesta $\set{R_{i j}}$.
+    Lisäksi määritelmästä 4.1.1 ei ole selvää kvantifioidaanko $\set{\xi_{i j}}$ universaalisti vai eksistentiaalisti.
+
+    Normaalisti matematiikassa implisiittiset parametrit sidotaan universaalisti lauseen tai määritelmän ylätasolla, mutta tämä johtaa väärään tulkintaan määritelmän 4.1.1 kohdalla.
+\end{remark}

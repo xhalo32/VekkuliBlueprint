@@ -1,0 +1,31 @@
+\chapter{Euklidinen avaruus $\R^n$}
+
+\begin{definition}[Reuna]
+    \label{reuna}
+    Olkoon $A \subset \R^n$ joukko.
+    Joukon $A$ \emph{reuna} $\partial A$ on joukko
+
+    \[
+    \partial A = \set{x \in \R^n \mid \forall r \gt 0, B(x, r) \inter A \neq \emptyset \land B(x, r) \inter A^c \neq \emptyset}
+    \]
+\end{definition}
+
+\begin{example}
+    $r$-säitesen $x_0$-keskeisen arvoimen kuulan reuna $\partial B(x_0, r) = \set{y \mid |y - x_0| = r}.$
+\end{example}
+
+\begin{definition}[Sulkeuma]
+    \label{sulkeuma}
+    Joukon $A$ \emph{sulkeuma} on $\overline{A} = A \union \partial A$.
+\end{definition}
+
+\begin{theorem}[Harjoitustehtävä 1.3:1]
+    \label{ht_1_3_1}
+    \uses{reuna, sulkeuma}
+    Olkoon $A \subset \R^n$. Tällöin
+
+    \begin{itemize}
+        \item $\partial A$ on suljettu ja
+        \item $\overline{A}$ on suljettu.
+    \end{itemize}
+\end{theorem}
