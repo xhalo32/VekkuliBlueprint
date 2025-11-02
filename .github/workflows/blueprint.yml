@@ -29,7 +29,7 @@ jobs:
         run: ~/.elan/bin/lake exe cache get || true
 
       - name: Build project
-        run: ~/.elan/bin/lake build {{ github.repository }}
+        run: ~/.elan/bin/lake build ${{ github.repository }}
 
       - name: Cache build artifacts and API docs
         uses: actions/cache@v4
@@ -40,7 +40,7 @@ jobs:
           restore-keys: LakeBuild-
 
       - name: Build project API documentation
-        run: ~/.elan/bin/lake -R -Kenv=dev build {{ github.repository }}:docs
+        run: ~/.elan/bin/lake -R -Kenv=dev build ${{ github.repository }}:docs
       
       - name: Check for `home_page` folder # this is meant to detect a Jekyll-based website
         id: check_home_page
