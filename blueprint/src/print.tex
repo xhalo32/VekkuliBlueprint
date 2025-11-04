@@ -12,20 +12,32 @@
 
 \documentclass[a4paper]{report}
 
-\usepackage{geometry}
+\usepackage[textwidth=14cm]{geometry}
+\usepackage{xfrac}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
 
-\usepackage{expl3}
+\usepackage{amsmath}
+\usepackage{enumitem}
 
-\usepackage{amssymb, amsthm, mathtools}
-\usepackage[unicode,colorlinks=true,linkcolor=blue,urlcolor=magenta, citecolor=blue]{hyperref}
+% \usepackage{tikz-cd}
 
 \usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+\usepackage{fontspec}
+\setmathfont{Latin Modern Math}
+
+\usepackage[nameinlink, capitalize]{cleveref}
 
 \input{macros/common}
+
+\usepackage{amsthm}
+\usepackage{etexcmds}
+\usepackage{thmtools}
+
 \input{macros/print}
 
-\title{Logic and hard computational problems}
-\author{Niklas Halonen}
+\title{Vektorianalyysi}
+\author{Niklas Halonen, Alma Nevalainen}
 
 \begin{document}
 \maketitle

@@ -4,7 +4,9 @@
   pkgs ? import sources.nixpkgs {
     inherit system;
     config = { };
-    overlays = [ ];
+    overlays = [
+      ((import (sources.lean4-nix + "/lib/overlay.nix")).readToolchainFile ./lean-toolchain)
+    ];
   },
 }:
 let
@@ -21,12 +23,39 @@ let
         fi
       done
   '';
+
+  # tex = (
+  #   pkgs.texlive.combine {
+  #     inherit (pkgs.texlive)
+  #       scheme-basic
+  #       wrapfig
+  #       amsmath
+  #       ulem
+  #       hyperref
+  #       capt-of
+  #       enumitem
+  #       ;
+  #   }
+  # );
+  tex = pkgs.texliveMedium.withPackages (
+    ps: with ps; [
+      enumitem
+      cleveref
+    ]
+  );
+
+  blueprintBuildInputs = with pkgs; [
+    leanblueprint
+    tex
+    lean.lean-all
+  ];
+
 in
 {
   shell = pkgs.mkShell {
     buildInputs = with pkgs; [
       leanblueprint
-      texliveMedium
+      tex
       elan
       watch-blueprint
 
@@ -34,6 +63,46 @@ in
       graphviz
       python3Packages.livereload
     ];
+  };
+
+  blueprint.web = pkgs.stdenvNoCC.mkDerivation {
+    name = "blueprint-web";
+    src = ./.;
+    buildInputs = blueprintBuildInputs;
+
+    # lake exe cache get || true
+    buildPhase = ''
+      leanblueprint web
+      mkdir -p $out
+      cp -r blueprint/web $out/blueprint
+    '';
+    # lake -R -Kenv=dev build VekkuliBlueprint:docs
+  };
+
+  blueprint.pdf = pkgs.stdenvNoCC.mkDerivation {
+    name = "blueprint-pdf";
+    src = ./.;
+    buildInputs = blueprintBuildInputs ++ [ pkgs.texliveMedium ];
+
+    # lake exe cache get || true
+    buildPhase = ''
+      leanblueprint pdf
+      mkdir -p $out
+      cp -r blueprint/print $out/blueprint
+    '';
+    # lake -R -Kenv=dev build VekkuliBlueprint:docs
+  };
+
+  docs = pkgs.stdenvNoCC.mkDerivation {
+    name = "blueprint-pdf";
+    src = ./.;
+    buildInputs = blueprintBuildInputs;
+
+    # lake exe cache get || true
+    buildPhase = ''
+      lake build VekkuliBlueprint
+      lake -R -Kenv=dev build VekkuliBlueprint:docs
+    '';
   };
 
   formatter = pkgs.nixpkgs-fmt;

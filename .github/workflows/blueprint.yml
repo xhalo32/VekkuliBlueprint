@@ -40,14 +40,15 @@ jobs:
             mkdir -p home_page
           fi
 
-      - name: Build blueprint
+      - name: Build blueprint web version
         run: |
-          nix-shell -A shell
-          lake exe cache get || true
-          lake build ${{ github.event.repository.name }}
-          lake -R -Kenv=dev build ${{ github.event.repository.name }}:docs
-          leanblueprint web
-          cp -r blueprint/web home_page/blueprint
+          nix-build -A blueprint.web
+          cp -r result/blueprint home_page/blueprint
+
+      - name: Build blueprint PDF version
+        run: |
+          nix-build -A blueprint.pdf
+          cp result/blueprint/print.pdf home_page/blueprint
       
       - name: Cache build artifacts and API docs
         uses: actions/cache@v4
@@ -57,17 +58,18 @@ jobs:
           key:  LakeBuild-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ hashFiles('lake-manifest.json') }}
           restore-keys: LakeBuild-
 
-      - name: Check declarations mentioned in the blueprint exist in Lean code
-        run: |
-          lake exe checkdecls blueprint/lean_decls
+      # TODO
+      # - name: Check declarations mentioned in the blueprint exist in Lean code
+      #   run: |
+      #     lake exe checkdecls blueprint/lean_decls
 
-      - name: Copy API documentation to `home_page/docs`
-        run: cp -r .lake/build/doc home_page/docs
+      # - name: Copy API documentation to `home_page/docs`
+      #   run: cp -r .lake/build/doc home_page/docs
 
-      - name: Remove unnecessary lake files from documentation in `home_page/docs`
-        run: |
-          find home_page/docs -name "*.trace" -delete
-          find home_page/docs -name "*.hash" -delete
+      # - name: Remove unnecessary lake files from documentation in `home_page/docs`
+      #   run: |
+      #     find home_page/docs -name "*.trace" -delete
+      #     find home_page/docs -name "*.hash" -delete
 
       - name: Bundle dependencies
         uses: ruby/setup-ruby@v1

@@ -312,3 +312,5 @@ src/web.paux
 web/
 web.pdf
 lean_decls
+
+print/

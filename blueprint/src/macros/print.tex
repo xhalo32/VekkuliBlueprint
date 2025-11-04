@@ -9,6 +9,20 @@
 % sense only for the web version, such as dependency graph
 % macros.
 
+\declaretheorem[numberwithin=chapter]{theorem}
+\declaretheorem[sibling=theorem]{proposition}
+\declaretheorem[sibling=theorem]{corollary}
+\declaretheorem[sibling=theorem]{remark}
+\declaretheorem[sibling=theorem]{lemma}
+\declaretheorem[sibling=theorem]{definition}
+\declaretheorem[sibling=theorem]{example}
+\declaretheorem[sibling=theorem]{variable}
+
+\declaretheorem[numbered=no, name=Theorem]{theorem-intro}
+\declaretheorem[numbered=no, name=Proposition]{proposition-intro}
+\declaretheorem[numbered=no, name=Corollary]{corollary-intro}
+\declaretheorem[numbered=no, name=Lemma]{lemma-intro}
+\declaretheorem[numbered=no, name=Definition]{definition-intro}
 
 % Dummy macros that make sense only for web version.
 \newcommand{\lean}[1]{}

@@ -1,5 +1,19 @@
 {
   "pins": {
+    "lean4-nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "lenianiva",
+        "repo": "lean4-nix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "3550873ed1a87d666d633d34921e79abaa4671c1",
+      "timestamp": "2025-10-25T05:01:07Z",
+      "url": "https://github.com/lenianiva/lean4-nix/archive/3550873ed1a87d666d633d34921e79abaa4671c1.tar.gz",
+      "hash": "sha256-eEs2YpE84+d6a8VKXCACNJy5czcu8GQCaeSZwR/mFMk="
+    },
     "nixpkgs": {
       "type": "Git",
       "repository": {
