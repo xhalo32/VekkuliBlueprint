@@ -43,12 +43,14 @@ jobs:
       - name: Build blueprint web version
         run: |
           nix-build -A blueprint.web
-          cp -r result/blueprint home_page/blueprint
+          cp -L -r result/blueprint home_page/blueprint
+          chmod +w -R home_page
 
       - name: Build blueprint PDF version
         run: |
           nix-build -A blueprint.pdf
-          cp result/blueprint/print.pdf home_page/blueprint
+          cp -L result/blueprint/print.pdf home_page/blueprint/print.pdf
+          chmod +w -R home_page
       
       - name: Cache build artifacts and API docs
         uses: actions/cache@v4
