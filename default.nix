@@ -93,16 +93,10 @@ in
     # lake -R -Kenv=dev build VekkuliBlueprint:docs
   };
 
-  docs = pkgs.stdenvNoCC.mkDerivation {
-    name = "blueprint-pdf";
+  docs = pkgs.lean.buildLeanPackage {
+    name = "docs";
     src = ./.;
-    buildInputs = blueprintBuildInputs;
-
-    # lake exe cache get || true
-    buildPhase = ''
-      lake build VekkuliBlueprint
-      lake -R -Kenv=dev build VekkuliBlueprint:docs
-    '';
+    roots = [ "VekkuliBlueprint:docs" ];
   };
 
   formatter = pkgs.nixpkgs-fmt;
