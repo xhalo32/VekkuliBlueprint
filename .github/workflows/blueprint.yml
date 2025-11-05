@@ -51,7 +51,13 @@ jobs:
           nix-build -A blueprint.pdf
           cp -L result/blueprint/print.pdf home_page/blueprint/print.pdf
           chmod +w -R home_page
-      
+
+      - name: Build website
+        run: |
+          nix-build -A website
+          cp -L -r result/. home_page/
+          chmod +w -R home_page
+
       - name: Cache build artifacts and API docs
         uses: actions/cache@v4
         with:

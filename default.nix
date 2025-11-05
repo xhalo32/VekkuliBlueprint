@@ -65,6 +65,18 @@ in
     ];
   };
 
+  website = pkgs.stdenvNoCC.mkDerivation {
+    name = "website";
+    src = ./website;
+    buildInputs = [ pkgs.typst ];
+
+    buildPhase = ''
+      typst compile --features html --format html index.typ
+      mkdir -p $out
+      cp index.html styles.css $out
+    '';
+  };
+
   blueprint.web = pkgs.stdenvNoCC.mkDerivation {
     name = "blueprint-web";
     src = ./.;
