@@ -9,10 +9,10 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "3550873ed1a87d666d633d34921e79abaa4671c1",
-      "timestamp": "2025-10-25T05:01:07Z",
-      "url": "https://github.com/lenianiva/lean4-nix/archive/3550873ed1a87d666d633d34921e79abaa4671c1.tar.gz",
-      "hash": "sha256-eEs2YpE84+d6a8VKXCACNJy5czcu8GQCaeSZwR/mFMk="
+      "revision": "5670f3815d3abdfb13b43ca4ef81c576ab9b655b",
+      "timestamp": "2025-11-30T18:30:51Z",
+      "url": "https://github.com/lenianiva/lean4-nix/archive/5670f3815d3abdfb13b43ca4ef81c576ab9b655b.tar.gz",
+      "hash": "sha256-W1N8ZPYZMnekkCTjYmSOomRZaW4UpGwt5Pl5kDMNB+o="
     },
     "nixpkgs": {
       "type": "Git",
@@ -23,10 +23,10 @@
       },
       "branch": "nixos-unstable",
       "submodules": false,
-      "revision": "08dacfca559e1d7da38f3cf05f1f45ee9bfd213c",
-      "timestamp": "2025-10-28T17:26:24Z",
-      "url": "https://github.com/nixos/nixpkgs/archive/08dacfca559e1d7da38f3cf05f1f45ee9bfd213c.tar.gz",
-      "hash": "sha256-o9KF3DJL7g7iYMZq9SWgfS1BFlNbsm6xplRjVlOCkXI="
+      "revision": "418468ac9527e799809c900eda37cbff999199b6",
+      "timestamp": "2025-12-02T09:27:49Z",
+      "url": "https://github.com/nixos/nixpkgs/archive/418468ac9527e799809c900eda37cbff999199b6.tar.gz",
+      "hash": "sha256-7WUCZfmqLAssbDqwg9cUDAXrSoXN79eEEq17qhTNM/Y="
     }
   },
   "version": 6

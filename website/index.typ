@@ -1,3 +1,4 @@
+// https://github.com/typst/typst/issues/7223#issuecomment-3446402111
 
 /// Produce default document information needed for `default-head`. Requires
 /// context.
@@ -110,4 +111,4 @@
 Tämä projekti on Vektorianalyysi-kurssin aikana kehitetty luuranko vektorianalyysin formalisointia varten.
 Löydät materiaalin painamalla *Blueprint*-painikkeesta, joka vie sinut #link("https://github.com/PatrickMassot/leanblueprint")[leanblueprint]-työkalulla luotuun dokumenttiin, josta löydät kätevän verkkomaisen rakenteen kurssin määritelmistä ja tuloksista (#link("./blueprint/dep_graph_document.html")[Dependency graph]).
 
-Päälähde on #link("https://helda.helsinki.fi/items/983661c5-d242-4e33-88b6-c5a3663276f4")[Olli Martio: Vektorianalyysi], mutta sisältää myös Sauli Lindbergin luennoiman Vektorianalyysi II kurssin luentomonisteesta hyödyllisiä tuloksia.
+Päälähde on #link("https://helda.helsinki.fi/items/983661c5-d242-4e33-88b6-c5a3663276f4")[Olli Martio: Vektorianalyysi], mutta projekti sisältää myös tuloksia Sauli Lindbergin luennoiman Vektorianalyysi II kurssin luentomonisteesta.

@@ -12,6 +12,7 @@
 let
   watch-blueprint = pkgs.writeShellScriptBin "watch-blueprint" ''
     rm -rf blueprint/web
+    leanblueprint --version
     leanblueprint web
     echo "Watching for changes in blueprint/src/..."
     ${pkgs.inotify-tools}/bin/inotifywait -e close_write,moved_to,create -m -r blueprint/src |

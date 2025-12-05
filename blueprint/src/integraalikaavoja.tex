@@ -1,0 +1,33 @@
+\chapter{Integraalikaavoja}
+
+\begin{definition}[Polkuyhtenäinen (kurssin määritelmä)]
+    \label{Polkuyhtenäinen}
+    Avoin $D \subset \R^n$ on \emph{polkuyhtenäinen} jos kaikilla $x, y \in D$ on olemassa jatkuvasti derivoituva $\gamma : [a, b] \to D$, siten että $\gamma(a) = x$ ja $\gamma(b) = y$.
+\end{definition}
+
+\begin{definition}[Polkuyhtenäinen ($C^0$)]
+    \label{PolkuyhtenäinenC0}
+    Avoin $D \subset \R^n$ on \emph{polkuyhtenäinen} jos kaikilla $x, y \in D$ on olemassa jatkuva $\gamma : [a, b] \to D$, siten että $\gamma(a) = x$ ja $\gamma(b) = y$.
+\end{definition}
+
+\begin{theorem}[\ref{PolkuyhtenäinenC0} $\Rightarrow$ \ref{Polkuyhtenäinen}]
+    Olkoon $D$ polkuyhtenäinen. Olkoon $x, y \in D$.
+    Nyt on olemassa $C^0$-funktio $\gamma : [a, b] \to D$, jolle $\gamma(a) = x$ ja $\gamma(b) = y$.
+
+    Koska $D$ avoin, on olemassa $\delta \gt 0$, siten että paksunnettu $E := \gamma [a, b] \times \overline{B}(0, \delta) \subset D$.
+
+
+    Sillä $E$ kompakti $D$:n osajoukko, on olemassa äärellinen peite avoimia kuulia $A_1, ..., A_n \subset D$, siten että
+    \[
+        \bigcup_i A_i \supset E.
+    \]
+
+    Olkoon $a_0 = x$ ja $a_{n + 1} = y$.
+    Valitaan jokaisesta $A_i$ piste $a_i$ ja muodostetaan $\gamma' : [0, n + 1] \in E$ siten että $\gamma' [i - 1/2, i + 1/2] \in A_i$.
+    Kiinnitetään
+    \[
+        \gamma'(i + 1/2) = \frac{a_i + a_{i + 1}}2.
+    \]
+    Muualla $\gamma'$ kulkee ympyrän kaarta pitkin pisteestä $\gamma'(i - 1/2)$ pisteeseen $\gamma'(i + 1/2)$, joten se pysyy joukossa $E$.
+
+\end{theorem}

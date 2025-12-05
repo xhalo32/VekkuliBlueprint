@@ -30,7 +30,7 @@
 
 \begin{definition}[Pistevieras]
     \label{pistevieras}
-    Joukot $C_i \subset \R$ ovat \emph{pistevieraita} jos leikkausjoukot $\C_i \inter C_j = \emptyset$ kaikilla $i \neq j$, lukuunottamatta äärellistä määrää "kulmapisteitä".
+    Joukot $C_i \subset \R$ ovat \emph{pistevieraita} jos leikkausjoukot $C_i \inter C_j = \emptyset$ kaikilla $i \neq j$, lukuunottamatta äärellistä määrää "kulmapisteitä".
 
     Huom: tämä kurssin käyttämä määritelmä on epäpätevä, ks. määritelmä \ref{reunavieras}
 \end{definition}
@@ -278,4 +278,54 @@
     Kutsutaan tällaista epäoleelliseksi integraaliksi
 \end{remark}
 
+
+\section{Riemannin summa yleisessä joukossa}
+
+\begin{definition}[Yleinen jako]
+    Olkoon $D \subseteq \R^2$ kompakti ja $\partial D$ nollajoukko. Äärellinen joukko $\set{D_i}_{i \leq k}$ on joukon $D$ \emph{jako osiin} $D_i$, jos
+    \begin{itemize}
+        \item $D_i$ ovat kompakteja
+        \item $\partial D_i$ ovat nollajoukkoja
+        \item $D_i$ ovat reunavieraita
+        \item $\big\union D_i = D$.
+    \end{itemize}
+\end{definition}
+
+\begin{variable}
+    Olkoon $D \subseteq \R^2$ kompakti ja $\partial D$ nollajoukko.
+\end{variable}
+
+\begin{theorem}
+    Olkoon $f : D \to \R$ jatkuva.
+
+    \[
+    \sum_{i=1}^{k} f(x_i, y_i) \area(D_i) \to \int_D f dx dy
+    \]
+
+    aina, kun $norm(\set{D_i}) \to 0$ ja $(x_i, y_i) \in D_i$ kaikilla $i$.
+\end{theorem}
+\begin{proof}
+    Perustuu $f$ tasaiseen jatkuvuuteen kompaktissa joukossa.
+\end{proof}
+
+\begin{remark}
+    Ylemmässä $\int_D$ on kirjan määritelmän 4.2.1 mukainen integraali.
+\end{remark}
+
+\begin{remark}
+    Raja-arvo tarkoittaa täsmällisemmin
+\end{remark}
+
 \section{Muuttujan vaihto integraaleissa}
+
+\begin{theorem}
+    \[
+    \int_{D'} f(x, y) dx dy = \int_D f(w(x, y)) |det w'(x, y)| dx dy
+    \]
+
+    Missä jälkimmäinen integraali voi olla epäoleellin, sillä determinantti voi olla rajoittamaton.
+\end{theorem}
+
+\begin{theorem}
+    Jos $\set{D_i}$ on äärellinen joukko suorakaiteita, niin $\set{w(D_i)}$ on $\overline{D'}$ jako.
+\end{theorem}
